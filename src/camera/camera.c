@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 21:06:27 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/22 17:16:02 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:27:24 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_ray ray_init(t_render *rnd, t_camera *cam, int px, int py)
 	v_vec3_add(&dir, &axis[HORIZONTAL]);
 	v_vec3_add(&dir, &axis[VERTICAL]);
 	v_vec3_sub(&dir, &cam->center);
+	v_vec3_unit(&dir);
 	r = ray(&cam->center, &dir);
 	return (r);
 }
