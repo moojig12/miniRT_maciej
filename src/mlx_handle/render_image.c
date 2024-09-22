@@ -6,11 +6,11 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:16:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/21 21:41:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/22 17:17:25 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mrt.h"
+#include "../../inc/mrt.h"
 
 int	transform_color(t_color *color)
 {
@@ -30,7 +30,7 @@ int render(t_render *rnd, t_camera *camera)
 		x = 0;
 		while(x < rnd->window->width)
 		{
-			pray = ray_to_pixel(camera, x, y);
+			pray = ray_init(rnd, camera, x, y);
 			pcolor = ray_color(&pray, rnd);
 			mlx_put_pixel(rnd->vp_img, x, y, transform_color(&pcolor));
 			x++;

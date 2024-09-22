@@ -6,12 +6,15 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 21:06:12 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 21:36:46 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/22 17:02:31 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 # define CAMERA_H
+
+# include "mrt.h"
+#include "vec3.h"
 
 # define MAX_DEPTH 5
 # define IMG_FOV 70
@@ -27,8 +30,11 @@ struct	s_camera
 	
 	t_vec3		pix_du; // horizontal pixel offest
 	t_vec3		pix_dv; // vertical pixel offest
+	t_vec3		horiz;
+	t_vec3		vert;
+	t_vec3		llc; // left lower corner
 	float		aspect_ratio; // width / height
-	float		focal_dist; //get rid of this
+	float		focal_dist;
 	float		pix_size;
 	float		vp_width;
 	float		vp_height;
