@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 21:06:27 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/22 17:27:24 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:15:11 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ t_camera	camera_new(t_render *render)
 	t_camera	c;
 
 	c = *render->options->objects.camera;
+	// v_vec3_unit(&c.center);
 	c.aspect_ratio = (double) render->vp_img->width / render->vp_img->height;
 	c.img_width = render->vp_img->width;
 	c.img_height = render->vp_img->height;
 	c.max_depth = MAX_DEPTH;
 	viewport_init(&c);
-	c.focal_dist = 1.0f;
+	c.focal_dist = 2.0f;
 	c.horiz = vec3(c.vp_width, 0.0f, 0.0f);
 	c.vert = vec3(0.0f, c.vp_height, 0.0f);
 	c.llc = vec3(-c.vp_width / 2, -c.vp_height / 2, -c.focal_dist);

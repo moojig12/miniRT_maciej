@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mrt.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:06:22 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 19:10:03 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/25 19:09:16 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_render t_render;
 # include "def_scene.h"
 # include "def_mlx.h"
 
+# define EPSILON 1e-10
 
 # include "vec3.h"
 
@@ -49,8 +50,8 @@ typedef struct s_render
     t_options   *options;
 }   t_render;
 
-# define VP_WIDTH  960
-# define VP_HEIGHT 540
+# define VP_WIDTH  650
+# define VP_HEIGHT 450
 
 # define ASPECT_R 1.77777777777
 # define IWIDTH 400

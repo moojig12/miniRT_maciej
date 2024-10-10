@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:59:50 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/21 21:17:49 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:58:45 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_obj
 }	t_obj;
 
 t_sphere			sphere(t_point3 c, float r);
-bool				hit_sphere(const t_sphere *s, t_ray *r);
+bool				hit_sphere(t_sphere *s, t_ray *r);
 
 t_plane				plane(t_point3 center, t_vec3 norm);
 bool				hit_plane(t_plane *p, t_ray *r);

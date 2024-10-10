@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:02:26 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/21 21:36:32 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/10/10 19:24:11 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int start_mlx(t_render *rnd)
 	rnd->window = mlx_init(width, height, "TriCycles", true);
 	rnd->vp_img = mlx_new_image(rnd->window, width, height);
 	cam = camera_new(rnd);
-	if (render(rnd, &cam) == 1)
-		return (1);
-	mlx_key_hook(rnd->window, &closing_hook, rnd);
-
-	
+	//while (1)
+	//{
+		if (render(rnd, &cam) == 1)
+			return (1);
+		mlx_key_hook(rnd->window, &closing_hook, rnd);
+		//mlx_key_hook(rnd->window, &movement_hook_press, rnd);
+	//}
 	return(0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 19:30:40 by astavrop          #+#    #+#             */
-/*   Updated: 2024/09/21 21:24:43 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/09/23 18:27:48 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ bool	hit_plane(t_plane *p, t_ray *r)
 	float	b;
 	float	t;
 
-	v_vec3_sub((t_vec3 *) &p->coords, &r->orig);
-	a = dot(&p->normal, &p->coords);
-	b = dot(&p->normal, &r->dir);
+	v_vec3_sub(&r->orig, (t_vec3 *) &p->coords);
+	a = dot(&r->orig, &p->normal);
+	b = dot(&r->dir, &p->normal);
 	t = (float) a / b;
-	if (t <= 0)
+	if (t <= EPSILON)
 		return (false);
 	return (true);
 }

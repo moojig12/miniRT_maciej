@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:16:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/09/22 17:17:25 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:38:45 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int render(t_render *rnd, t_camera *camera)
 	int 	y;
 	t_color pcolor;
 	t_ray	pray;
-	
+
 	y = 0;
 	while(y < rnd->window->height)
 	{
