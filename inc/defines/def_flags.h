@@ -6,7 +6,7 @@
 /*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:44:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/10/16 03:28:28 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/17 17:16:47 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		opt_binary_assignment(int value, t_options *options);
 //flags/flag_utils.c
 char	*check_if_option(char *str);
 int		is_number(char *str);
-float	ft_atof(char *str);
+// float	ft_atof(char *str);
 
 //flags/handle_values.c
 int		handle_null_value(char *str);
