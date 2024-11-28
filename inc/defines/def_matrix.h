@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   def_matrix.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:42:27 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 21:16:05 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:39:33 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //operations/matrix/matrix_ops_1.c
 t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2);
-t_tuple		multiply_matrix_tuple(t_matrix *mat, t_tuple *tuple);
+t_tuple		multiply_matrix_tuple(t_matrix *mat, t_tuple tuple);
 t_matrix	*init_identity_matrix(int size);
 t_matrix	submatrix(t_matrix mat, int ex_row, int ex_col);
 

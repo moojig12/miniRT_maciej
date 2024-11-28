@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 16:05:19 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 23:03:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -560,6 +560,13 @@
 // 	print_tuple(*c9);
 // }
 
+mlx_image_t	*main_allocation(mlx_t *mlx, t_camera *camera)
+{
+	mlx_image_t	*image;
+
+	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
+	return (image);
+}
 
 // // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
@@ -568,7 +575,11 @@ int main (void)
 	t_world	*world = test_world_plane();
 	t_camera *camera = camera_new(800, 400, M_PI / 3);
 	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
-	mlx_image_t *image = render(mlx, camera, world);
+
+	mlx_image_t	*image = main_allocation(mlx, camera);
+
+
+	render(camera, world, image);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);

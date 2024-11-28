@@ -3,34 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   patterns.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 23:14:04 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:47:45 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_pattern *new_pattern(t_pattern_type pattern, t_color3 *a, t_color3 *b)
+t_pattern new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b)
 {
-	t_pattern *p;
+	t_pattern p;
 
-	p = malloc(sizeof(t_pattern));
-	p->type = pattern;
-	p->a = a;
-	p->b = b;
-	p->transform = *init_identity_matrix(4);
+	p.type = pattern;
+	p.a = a;
+	p.b = b;
+	p.transform = *init_identity_matrix(4);
 	return (p);
 }
 
-void	set_pattern_transform(t_pattern *pattern, t_matrix *new_transform)
+void	set_pattern_transform(t_pattern pattern, t_matrix *new_transform)
 {
 	int	i;
 	int	j;
 	t_matrix *transform;
 
-	transform = &pattern->transform;
+	transform = &pattern.transform;
 	i = 0;
 	while (i < 4)
 	{
@@ -45,28 +44,31 @@ void	set_pattern_transform(t_pattern *pattern, t_matrix *new_transform)
 }
 
 //pattern at object
-t_color3 *pattern_at_object(t_pattern *pattern, t_shape *shape, t_point3 *point)
+t_color3 pattern_at_object(t_pattern pattern, t_shape *shape, t_point3 point)
 {
 	t_point3 object_space;
 	t_point3 pattern_space;
-	t_color3 *c;
+	t_color3 c;
 
 	object_space = multiply_matrix_tuple(inverse(shape->transform), point);
-	pattern_space = multiply_matrix_tuple(inverse(pattern->transform), &object_space);
-	c = pattern_at(pattern, &pattern_space);
+	pattern_space = multiply_matrix_tuple(inverse(pattern.transform), object_space);
+	c = pattern_at(pattern, pattern_space);
 	return (c);
 }
 
 //pattern at
-t_color3 *pattern_at(t_pattern *pattern, t_point3 *point)
+t_color3 pattern_at(t_pattern pattern, t_point3 point)
 {
-	if (pattern->type == STRIPE)
+	t_color3	null;
+
+	null = new_color3(0, 0, 0);
+	if (pattern.type == STRIPE)
 		return(stripe_at(pattern, point));
-	if (pattern->type == GRADIENT)
+	if (pattern.type == GRADIENT)
 		return(gradient_at(pattern, point));
-	if (pattern->type == RING)
+	if (pattern.type == RING)
 		return(ring_at(pattern, point));
-	if (pattern->type == CHECKERS)
+	if (pattern.type == CHECKERS)
 		return(checkers_at(pattern, point));
-	return (NULL);
+	return (null);
 }

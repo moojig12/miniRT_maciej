@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   def_rays.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:43:46 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 18:11:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:39:12 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ t_vec3	local_normal_at(t_shape *shape, t_point3 *local_point);
 
 //operations/rays/ray_reflect.c
 t_vec3 reflect(t_vec3 in, t_vec3 normal);
-t_light_p *new_light(t_point3 *position, t_color3 *intensity);
-t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow);
+t_light_p new_light(t_point3 position, t_color3 intensity);
+t_color3 lighting(t_material *m, t_shape *shape, t_light_p light, t_point3 point, t_vec3 eyev, t_vec3 normalv, bool in_shadow);
 
 //operations/rays/ray.c
-t_ray		*ray_new(t_point3 *orig, t_vec3 *dir);
-t_point3	ray_position(t_ray *ray, float t);
-t_ray		*ray_transform(t_ray *ray, t_matrix *matrix);
+t_ray		ray_new(t_point3 orig, t_vec3 dir);
+t_point3	ray_position(t_ray ray, float t);
+t_ray		ray_transform(t_ray ray, t_matrix *matrix);
 
 
 #endif

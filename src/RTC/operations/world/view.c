@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:55:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/16 20:31:01 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:59:35 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up)
 	t_vec3 true_up;
 	t_matrix orientation;
 
-	forward = normalize(sub_tuple_p(&to, &from));
+	forward = normalize(sub_tuple_p(to, from));
 	left = cross_product(forward, normalize(up));
 	true_up = cross_product(left, forward);
 	orientation.size = 4;

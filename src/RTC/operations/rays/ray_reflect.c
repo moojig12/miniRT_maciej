@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_reflect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 19:32:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:38:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,17 @@ t_vec3 reflect(t_vec3 in, t_vec3 normal)
 	return (reflect);
 }
 
-t_light_p *new_light(t_point3 *position, t_color3 *intensity)
+t_light_p new_light(t_point3 position, t_color3 intensity)
 {
-	t_light_p *light;
+	t_light_p light;
 
-	light = malloc(sizeof(t_light));
-	if (!light)
-		return (NULL);
-	light->position = position;
-	light->intensity = intensity;
-	light->next = NULL;
+	light.position = position;
+	light.intensity = intensity;
+	light.next = NULL;
 	return (light);
 }
 
-t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *point, t_vec3 eyev, t_vec3 normalv, bool in_shadow)
+t_color3 lighting(t_material *m, t_shape *shape, t_light_p light, t_point3 point, t_vec3 eyev, t_vec3 normalv, bool in_shadow)
 {
 	t_color3	effective_color;
 	t_vec3 		lightv;
@@ -49,10 +46,10 @@ t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *poi
 	t_color3	result;
 
 	if (m->pattern)
-		effective_color = color_mult(pattern_at_object(m->pattern, shape, point), light->intensity);
+		effective_color = color_mult(pattern_at_object(m->pattern, shape, point), light.intensity);
 	else
-		effective_color = color_mult(m->color, light->intensity);
-	lightv = normalize(sub_tuple_p(light->position, point));
+		effective_color = color_mult(m->color, light.intensity);
+	lightv = normalize(sub_tuple_p(light.position, point));
 	ambient = mult_tuple(effective_color, m->ambient);
 	light_dot_normal = dot_product(lightv, normalv);
 	if (light_dot_normal < 0)
@@ -70,7 +67,7 @@ t_color3 lighting(t_material *m, t_shape *shape, t_light_p *light, t_point3 *poi
 		else
 		{
 			factor = powf(reflect_dot_eye, m->shininess);
-			specular = mult_tuple(*light->intensity, (m->specular * factor));
+			specular = mult_tuple(light.intensity, (m->specular * factor));
 			
 		}
 	}
