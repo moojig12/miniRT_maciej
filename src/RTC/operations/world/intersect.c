@@ -6,13 +6,13 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 21:50:46 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 22:59:11 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-static void sort_intersections(t_x *xs);
+static t_x sort_intersections(t_x xs);
 
 //intersect world
 t_x	intersect_world(t_world *world, t_ray ray)
@@ -28,20 +28,21 @@ t_x	intersect_world(t_world *world, t_ray ray)
 	while (world->shapes)
 	{
 		xs_temp = intersect(world->shapes, ray);
-		if (xs_temp != NULL)
+		if (xs_temp.count == 0)
 		{
-			if (xs == NULL)
+			if (xs.count == 0)
 				xs = xs_temp;
 			else
-				xs = intersections((xs->count + xs_temp->count), xs, xs_temp);
+				xs = intersections((xs.count + xs_temp.count), xs, xs_temp);
 		}
 		world->shapes = world->shapes->next;
 	}
 	world->shapes = shape_temp;
-	sort_intersections(xs);
+	xs = sort_intersections(xs);
 	return (xs);
 }
-void sort_intersections(t_x xs)
+
+t_x sort_intersections(t_x xs)
 {
 	int i;
 	int j;

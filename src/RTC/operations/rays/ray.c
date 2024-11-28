@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:54:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 21:46:39 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 22:33:07 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_ray		ray_new(t_point3 orig, t_vec3 dir)
 {
 	t_ray	ray;
 
-	if (!ray)
-		return (NULL);
 	ray.orig = orig;
 	ray.dir = dir;
 	return (ray);

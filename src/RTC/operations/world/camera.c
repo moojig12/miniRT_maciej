@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 21:34:07 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 23:02:57 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,14 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
 	return(ray);
 }
 
-mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
+mlx_image_t *render(t_camera *camera, t_world *world, mlx_image_t *image)
 {
-	mlx_image_t *image;
-	t_ray *ray;
+	t_ray ray;
 	t_color3 color;
 	int color_int;
 	int y = 0;
 	int x = 0;
 	int total = camera->hsize * camera->vsize;
-
 
 	while(y < camera->vsize)
 	{

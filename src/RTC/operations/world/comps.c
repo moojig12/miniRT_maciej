@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 21:56:35 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 22:55:37 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ t_comp prepare_computations(t_i i, t_ray ray)
 {
 	t_comp comps;
 
-	comps->t = i->t;
-	comps->shape = i->shape;
-	comps->point = ray_position(ray, comps->t);
-	comps->eyev = neg_tuple(ray->dir);
-	comps->normalv = normal_at(comps->shape, comps->point);
-	if (dot_product(comps->normalv, comps->eyev) < 0)
+	comps.t = i.t;
+	comps.shape = i.shape;
+	comps.point = ray_position(ray, comps.t);
+	comps.eyev = neg_tuple(ray.dir);
+	comps.normalv = normal_at(comps.shape, comps.point);
+	if (dot_product(comps.normalv, comps.eyev) < 0)
 	{
-		comps->inside = true;
-		comps->normalv = neg_tuple(comps->normalv);
+		comps.inside = true;
+		comps.normalv = neg_tuple(comps.normalv);
 	}
 	else
-		comps->inside = false;
-	comps->over_point = add_tuples(comps->point, mult_tuple(comps->normalv, EPSILON));
-	comps->reflectv = reflect(ray->dir, comps->normalv);
+		comps.inside = false;
+	comps.over_point = add_tuples(comps.point, mult_tuple(comps.normalv, EPSILON));
+	comps.reflectv = reflect(ray.dir, comps.normalv);
 	return (comps);
 }
 
@@ -43,12 +43,12 @@ t_color3 shade_hit(t_world *world, t_comp comps, int remaining)
 	
 	light_temp = world->light;
 	bool in_shadow;
-	if (comps->shape->type != NONE)
+	if (comps.shape->type != NONE)
 	{
 		while(world->light != NULL)
 		{
-			in_shadow = is_shadowed(world, world->light->position, &comps->over_point);
-			surface = add_tuples(lighting(&comps->shape->material, comps->shape, world->light, &comps->over_point, comps->eyev, comps->normalv, in_shadow), surface);
+			in_shadow = is_shadowed(world, world->light->position, comps.over_point);
+			surface = add_tuples(lighting(&comps.shape->material, comps.shape, *world->light, comps.over_point, comps.eyev, comps.normalv, in_shadow), surface);
 			world->light = world->light->next;
 		}
 		world->light = light_temp;
@@ -66,7 +66,7 @@ t_color3 color_at(t_world *world, t_ray ray, int remaining)
 	t_color3 color;
 	
 	xs = intersect_world(world, ray);
-	if (xs->count == 0)
+	if (xs.count == 0)
 		return (new_color3(0, 0, 0));
 
 	i = hit(xs);
@@ -79,7 +79,7 @@ t_color3 color_at(t_world *world, t_ray ray, int remaining)
 	return (color);	
 }
 
-bool is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
+bool is_shadowed(t_world *world, t_point3 light_pos, t_point3 point)
 {
 	t_vec3 v = sub_tuple_p(light_pos, point);
 	float distance = magnitude(v);

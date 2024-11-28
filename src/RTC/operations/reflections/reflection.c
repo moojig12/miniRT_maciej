@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:36 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 21:58:44 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 22:39:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_color3	reflected_color(t_world *world, t_comp comps, int remaining)
 
 	if (remaining < 1)
 		return (new_color3(0, 0, 0));
-	if (comps->shape->material.reflective == 0) //maybe should be world
+	if (comps.shape->material.reflective == 0) //maybe should be world
 		return (new_color3(0, 0, 0));
 	reflect_ray = ray_new(comps.over_point, comps.reflectv);
 	color = color_at(world, reflect_ray, remaining - 1);
-	return (mult_tuple(color, comps->shape->material.reflective));
+	return (mult_tuple(color, comps.shape->material.reflective));
 }

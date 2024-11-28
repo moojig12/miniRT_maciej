@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:39:06 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 12:39:40 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:50:07 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ struct s_ray
 
 struct s_pattern
 {
-	t_color3		*a;
-	t_color3		*b;
+	t_color3		a;
+	t_color3		b;
 	t_matrix		transform;
 	t_pattern_type	type;
 };
 
 struct s_material
 {
-	t_color3		*color;
-	t_pattern		*pattern;
+	t_color3		color;
+	t_pattern		pattern;
 	float			ambient;
 	float			diffuse;
 	float			specular;

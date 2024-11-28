@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:35:59 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 16:11:20 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:51:13 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_material *default_material(void)
 
 	material = malloc(sizeof(t_material));
 	material->color = new_color3_p(1, 1, 1);
-	material->pattern = NULL;
+	// material->pattern = NULL;
 	material->ambient = 0.1;
 	material->diffuse = 0.9;
 	material->specular = 0.9;
@@ -34,7 +34,7 @@ t_world	*default_world(void)
 	world = malloc(sizeof(t_world));
 	world->shapes = NULL;
 	world->light = NULL;
-	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+	t_light_p l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
 	// t_light_p *l2 = new_light(new_point3_p(10, -10, -10), new_color3_p(0.1, 0.8, 0.1));
 	t_shape  *s1 = sphere_new();
 	s1->material.color = new_color3_p(0.8, 1.0, 0.6);
@@ -45,7 +45,7 @@ t_world	*default_world(void)
 	add_shape(&s1, s2);
 	world->shapes = s1;
 	// add_light(&world->light, l1);
-	world->light = l1;
+	world->light = &l1;
 	return (world);
 }
 
@@ -56,7 +56,7 @@ t_world *test_world(void)
 	world = malloc(sizeof(t_world));
 	world->shapes = NULL;
 	world->light = NULL;
-	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+	t_light_p l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
 	t_shape  *floor = sphere_new();
 	set_transform(floor, scaling(10, 0.01, 10));
 	floor->material.color = new_color3_p(1, 0.9, 0.9);
@@ -88,7 +88,7 @@ t_world *test_world(void)
 	add_shape(&floor, right);
 	add_shape(&floor, left);
 	world->shapes = floor;
-	add_light(&world->light, l1);
+	add_light(&world->light, &l1);
 	return (world);
 }
 
@@ -99,7 +99,7 @@ t_world *test_world_plane(void)
 	world = malloc(sizeof(t_world));
 	world->shapes = NULL;
 	world->light = NULL;
-	t_light_p *l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
+	t_light_p l1 = new_light(new_point3_p(-10, 10, -10), new_color3_p(1, 1, 1));
 	t_shape  *floor = plane_new();
 	floor->material.pattern = new_pattern(CHECKERS, new_color3_p(0.8, 0.2, 0.2), new_color3_p(0.2, 1, 0.2));
 	set_pattern_transform(floor->material.pattern, multiply_matrices(rotation_y(M_PI / 4), scaling(0.1, 0.1, 0.1)));
@@ -138,6 +138,6 @@ t_world *test_world_plane(void)
 	add_shape(&floor, right);
 	add_shape(&floor, left);
 	world->shapes = floor;
-	add_light(&world->light, l1);
+	add_light(&world->light, &l1);
 	return (world);
 }

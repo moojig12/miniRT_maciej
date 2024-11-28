@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 21:31:49 by root             ###   ########.fr       */
+/*   Updated: 2024/11/28 23:03:04 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -560,7 +560,7 @@
 // 	print_tuple(*c9);
 // }
 
-void	main_allocation(t_world *world)
+mlx_image_t	*main_allocation(mlx_t *mlx, t_camera *camera)
 {
 	mlx_image_t	*image;
 
@@ -576,10 +576,10 @@ int main (void)
 	t_camera *camera = camera_new(800, 400, M_PI / 3);
 	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
 
-	main_allocation(mlx, camera, world);
+	mlx_image_t	*image = main_allocation(mlx, camera);
 
 
-	mlx_image_t *image = render(mlx, camera, world);
+	render(camera, world, image);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);
