@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 16:11:57 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 21:34:07 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	get_pixel_size(t_camera *camera)
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 }
 
-t_ray *ray_for_pixel(t_camera *camera, int px, int py)
+t_ray ray_for_pixel(t_camera *camera, int px, int py)
 {
 	float	xoffset;
 	float	yoffset;
@@ -56,6 +56,7 @@ t_ray *ray_for_pixel(t_camera *camera, int px, int py)
 	t_tuple	pixel;
 	t_tuple	origin;
 	t_tuple	direction;
+	t_ray	ray;
 
 	xoffset = (px + 0.5) * camera->pixel_size;
 	yoffset = (py + 0.5) * camera->pixel_size;
@@ -66,7 +67,10 @@ t_ray *ray_for_pixel(t_camera *camera, int px, int py)
 	pixel = multiply_matrix_tuple(inverse(camera->transform), new_point3_p(world_x, world_y, -1));
 	origin = multiply_matrix_tuple(inverse(camera->transform), new_point3_p(0, 0, 0));
 	direction = normalize(sub_tuple(pixel, origin));
-	return(ray_new(&origin, &direction));
+
+	ray.dir = direction;
+	ray.orig = origin;
+	return(ray);
 }
 
 mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
@@ -79,7 +83,6 @@ mlx_image_t *render(mlx_t *mlx, t_camera *camera, t_world *world)
 	int x = 0;
 	int total = camera->hsize * camera->vsize;
 
-	image = mlx_new_image(mlx, camera->hsize, camera->vsize);
 
 	while(y < camera->vsize)
 	{

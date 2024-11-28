@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_reflect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 19:32:12 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:03:14 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,13 @@ t_vec3 reflect(t_vec3 in, t_vec3 normal)
 	return (reflect);
 }
 
-t_light_p *new_light(t_point3 *position, t_color3 *intensity)
+t_light_p new_light(t_point3 position, t_color3 intensity)
 {
-	t_light_p *light;
+	t_light_p light;
 
-	light = malloc(sizeof(t_light));
-	if (!light)
-		return (NULL);
-	light->position = position;
-	light->intensity = intensity;
-	light->next = NULL;
+	light.position = position;
+	light.intensity = intensity;
+	light.next = NULL;
 	return (light);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:36:41 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 16:04:57 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 21:50:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 static void sort_intersections(t_x *xs);
 
 //intersect world
-t_x	*intersect_world(t_world *world, t_ray *ray)
+t_x	intersect_world(t_world *world, t_ray ray)
 {
-	t_x *xs;
-	t_x *xs_temp;
+	t_x xs;
+	t_x xs_temp;
 	t_shape *shape_temp;
 	
-	xs = malloc(sizeof(t_x));
 	shape_temp = world->shapes;
-	xs->count = 0;
+	xs.count = 0;
 	xs = intersect(world->shapes, ray);
 	world->shapes = world->shapes->next;
 	while (world->shapes)
@@ -42,26 +41,27 @@ t_x	*intersect_world(t_world *world, t_ray *ray)
 	sort_intersections(xs);
 	return (xs);
 }
-void sort_intersections(t_x *xs)
+void sort_intersections(t_x xs)
 {
 	int i;
 	int j;
 	t_i temp;
 
 	i = 0;
-	while (i < xs->count)
+	while (i < xs.count)
 	{
 		j = i + 1;
-		while (j < xs->count)
+		while (j < xs.count)
 		{
-			if (xs->i[i].t > xs->i[j].t)
+			if (xs.i[i].t > xs.i[j].t)
 			{
-				temp = xs->i[i];
-				xs->i[i] = xs->i[j];
-				xs->i[j] = temp;
+				temp = xs.i[i];
+				xs.i[i] = xs.i[j];
+				xs.i[j] = temp;
 			}
 			j++;
 		}
 		i++;
 	}
+	return (xs);
 }

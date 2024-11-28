@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtc.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:04:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 17:37:09 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 21:41:27 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ struct s_project
 struct s_x
 {
 	int			count;
-	t_i			*i;
+	t_i			i[2];
 };
 
 struct s_intersection

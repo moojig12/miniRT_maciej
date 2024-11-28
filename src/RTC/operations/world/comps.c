@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   comps.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/27 13:53:53 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/28 21:56:35 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
 //prepare computations
-t_comp *prepare_computations(t_i *i, t_ray *ray)
+t_comp prepare_computations(t_i i, t_ray ray)
 {
-	t_comp *comps;
+	t_comp comps;
 
-	comps = malloc(sizeof(t_comp));
 	comps->t = i->t;
 	comps->shape = i->shape;
 	comps->point = ray_position(ray, comps->t);
@@ -36,7 +35,7 @@ t_comp *prepare_computations(t_i *i, t_ray *ray)
 }
 
 //shade hit
-t_color3 shade_hit(t_world *world, t_comp *comps, int remaining)
+t_color3 shade_hit(t_world *world, t_comp comps, int remaining)
 {
 	t_color3 surface = new_color3(0, 0, 0);
 	t_color3 reflected;
@@ -59,34 +58,24 @@ t_color3 shade_hit(t_world *world, t_comp *comps, int remaining)
 	return(new_color3(0, 0, 0));
 }
 
-
-
-t_color3 color_at(t_world *world, t_ray *ray, int remaining)
+t_color3 color_at(t_world *world, t_ray ray, int remaining)
 {
-	t_x *xs;
+	t_x xs;
 	t_i i;
-	t_comp *comps;
+	t_comp comps;
 	t_color3 color;
 	
 	xs = intersect_world(world, ray);
 	if (xs->count == 0)
-	{
-		free(xs->i);
-		free(xs);
 		return (new_color3(0, 0, 0));
-	}
+
 	i = hit(xs);
 	if (i.shape == NULL)
-	{
-		free(xs->i);
-		free(xs);
 		return (new_color3(0, 0, 0));
-	}
-	comps = prepare_computations(&i, ray);
+
+	comps = prepare_computations(i, ray);
 	color = shade_hit(world, comps, remaining);
-	free(xs->i);
-	free(xs);
-	free(comps);
+
 	return (color);	
 }
 
@@ -96,23 +85,14 @@ bool is_shadowed(t_world *world, t_point3 *light_pos, t_point3 *point)
 	float distance = magnitude(v);
 	t_vec3 direction = normalize(v);
 
-	t_ray *r = ray_new(point, &direction);
-	t_x *xs = intersect_world(world, r);
+	t_ray r = ray_new(point, direction);
+	t_x xs = intersect_world(world, r);
 	t_i h = hit(xs);
+
 	if (h.t > 0 && h.t < distance)
-	{
-		free(xs->i);
-		free(xs);
-		free(r);
 		return (true);
-	}
 	else
-	{
-		free(xs->i);
-		free(xs);
-		free(r);
 		return (false);
-	}
 }
 
 
