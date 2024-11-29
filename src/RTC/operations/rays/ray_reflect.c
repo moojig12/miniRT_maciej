@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:33:08 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 22:38:59 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:02:26 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_color3 lighting(t_material *m, t_shape *shape, t_light_p light, t_point3 point
 	float		factor;
 	t_color3	result;
 
-	if (m->pattern)
+	if (m->pattern.type != 0)
 		effective_color = color_mult(pattern_at_object(m->pattern, shape, point), light.intensity);
 	else
 		effective_color = color_mult(m->color, light.intensity);

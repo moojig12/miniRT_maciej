@@ -3,82 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_ops_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:41:37 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/13 19:02:33 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/29 08:53:05 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mrt.h"
 
-t_matrix	*multiply_matrices(t_matrix *mat1, t_matrix *mat2)
+t_matrix	multiply_matrices(t_matrix mat1, t_matrix mat2)
 {
 	int i;
 	int j;
 	int k;
-	t_matrix *result;
+	t_matrix result;
 
 	i = 0;
-	result = malloc(sizeof(t_matrix));
-	while (i < mat1->size)
+	while (i < mat1.size)
 	{
 		j = 0;
-		while (j < mat1->size)
+		while (j < mat1.size)
 		{
-			result->a[i][j] = 0;
+			result.a[i][j] = 0;
 			k = 0;
-			while (k < mat1->size)
+			while (k < mat1.size)
 			{
-				result->a[i][j] += mat1->a[i][k] * mat2->a[k][j];
+				result.a[i][j] += mat1.a[i][k] * mat2.a[k][j];
 				k++;
 			}
 			j++;
 		}
 		i++;
 	}
-	result->size = mat1->size;
+	result.size = mat1.size;
 	return result;
 }
 
 //multiply 4x4 matrix by tuple
-t_tuple	multiply_matrix_tuple(t_matrix *mat, t_tuple *tuple)
+t_tuple	multiply_matrix_tuple(t_matrix mat, t_tuple tuple)
 {
 	int i;
 	t_tuple result;
 	
 	i = 0;
-	while(i < mat->size)
+	while(i < mat.size)
 	{
-		result.a[i] = mat->a[i][0] * tuple->x + mat->a[i][1] * tuple->y + mat->a[i][2] * tuple->z + mat->a[i][3] * tuple->w;
+		result.a[i] = mat.a[i][0] * tuple.x + mat.a[i][1] * tuple.y + mat.a[i][2] * tuple.z + mat.a[i][3] * tuple.w;
 		i++;
 	}
 	return (result);
 }
 
 //init identity matrix
-t_matrix *init_identity_matrix(int size)
+t_matrix init_identity_matrix(int size)
 {
 	int i;
 	int j;
-	t_matrix *result;
+	t_matrix result;
 
 	i = 0;
-	result = malloc(sizeof(t_matrix));
 	while (i < size)
 	{
 		j = 0;
 		while (j < size)
 		{
 			if (i == j)
-				result->a[i][j] = 1;
+				result.a[i][j] = 1;
 			else
-				result->a[i][j] = 0;
+				result.a[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-	result->size = size;
+	result.size = size;
 	return result;
 }
 

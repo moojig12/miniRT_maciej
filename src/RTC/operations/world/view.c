@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:55:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 22:59:35 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:03:53 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ t_matrix view_transformation(t_point3 from, t_point3 to, t_vec3 up)
 	left = cross_product(forward, normalize(up));
 	true_up = cross_product(left, forward);
 	orientation.size = 4;
-	orientation = *init_identity_matrix(4);
+	orientation = init_identity_matrix(4);
 	fill_row(&orientation, left, 0);
 	fill_row(&orientation, true_up, 1);
 	fill_row(&orientation, neg_vec3(forward), 2);
-	orientation = *multiply_matrices(&orientation, translation(-from.x, -from.y, -from.z));
+	orientation = multiply_matrices(orientation, translation(-from.x, -from.y, -from.z));
 	return (orientation);
 }
 

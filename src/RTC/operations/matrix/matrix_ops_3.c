@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_ops_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:07 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/26 16:35:08 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/29 08:54:55 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,29 @@ float determinant(t_matrix mat)
 	return det;
 }
 
-static void divide_matrix(t_matrix *mat, float det)
+static void divide_matrix(t_matrix mat, float det)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < mat->size)
+	while (i < mat.size)
 	{
 		j = 0;
-		while (j < mat->size)
+		while (j < mat.size)
 		{
-			mat->a[i][j] /= det;
+			mat.a[i][j] /= det;
 			j++;
 		}
 		i++;
 	}
 }
 
-t_matrix *inverse(t_matrix mat)
+t_matrix inverse(t_matrix mat)
 {
 	int i;
 	int j;
-	t_matrix *result;
+	t_matrix result;
 
 	i = 0;
 	if (determinant(mat) == 0)
@@ -84,12 +84,12 @@ t_matrix *inverse(t_matrix mat)
 		j = 0;
 		while (j < mat.size)
 		{
-			result->a[i][j] = cofactor(mat, i, j);
+			result.a[i][j] = cofactor(mat, i, j);
 			j++;
 		}
 		i++;
 	}
-	result->size = mat.size;
+	result.size = mat.size;
 	result = transpose_matrix(result);
 	divide_matrix(result, determinant(mat));
 	return result;

@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 05:02:00 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 23:05:10 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 08:49:48 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static t_x intersect_sphere(t_shape *sphere, t_ray ray)
 	float	b;
 	float	c;
 	float	discriminant;
-	float	t1;
-	float	t2;
 
 	xs.count = 0;
 	sphere_to_ray = sub_tuple(ray.orig, new_point3(0, 0, 0));
@@ -32,16 +30,16 @@ static t_x intersect_sphere(t_shape *sphere, t_ray ray)
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 	{
-		t1 = 0;
-		t2 = 0;
+		xs.i[0].t = 0;
+		xs.i[1].t = 0;
 		xs.i[0].shape = NULL;
 		xs.i[1].shape = NULL;
 	}
 	else
 	{
 		xs.count = 2;
-		t1 = (-b - sqrt(discriminant)) / (2 * a);
-		t2 = (-b + sqrt(discriminant)) / (2 * a);
+		xs.i[0].t = (-b - sqrt(discriminant)) / (2 * a);
+		xs.i[1].t = (-b + sqrt(discriminant)) / (2 * a);
 		xs.i[0].shape = sphere;
 		xs.i[1].shape = sphere;
 	}

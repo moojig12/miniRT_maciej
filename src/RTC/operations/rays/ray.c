@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 20:54:51 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 22:33:07 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:02:45 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_point3	ray_position(t_ray ray, float t)
 	return (pos);
 }
 
-t_ray		ray_transform(t_ray ray, t_matrix *matrix)
+t_ray		ray_transform(t_ray ray, t_matrix matrix)
 {
 	t_ray	new_ray;
 

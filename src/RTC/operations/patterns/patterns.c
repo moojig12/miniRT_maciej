@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 22:47:45 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 08:59:28 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_pattern new_pattern(t_pattern_type pattern, t_color3 a, t_color3 b)
 	p.type = pattern;
 	p.a = a;
 	p.b = b;
-	p.transform = *init_identity_matrix(4);
+	p.transform = init_identity_matrix(4);
 	return (p);
 }
 
-void	set_pattern_transform(t_pattern pattern, t_matrix *new_transform)
+void	set_pattern_transform(t_pattern pattern, t_matrix new_transform)
 {
 	int	i;
 	int	j;
@@ -36,7 +36,7 @@ void	set_pattern_transform(t_pattern pattern, t_matrix *new_transform)
 		j = 0;
 		while (j < 4)
 		{
-			transform->a[i][j] = new_transform->a[i][j];
+			transform->a[i][j] = new_transform.a[i][j];
 			j++;
 		}
 		i++;

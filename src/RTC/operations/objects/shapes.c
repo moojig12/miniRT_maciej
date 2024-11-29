@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shapes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdomnik <mdomnik@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 19:52:39 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/19 21:58:34 by mdomnik          ###   ########.fr       */
+/*   Updated: 2024/11/29 08:58:36 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_shape *test_shape(void)
 
 	shape = malloc(sizeof(t_shape));
 	shape->type = SPHERE;
-	shape->transform = *init_identity_matrix(4);
+	shape->transform = init_identity_matrix(4);
 	shape->material = *default_material();
 	shape->next = NULL;
 	return (shape);
