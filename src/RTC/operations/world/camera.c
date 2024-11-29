@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 13:52:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/29 09:04:20 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:59:06 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_ray ray_for_pixel(t_camera *camera, int px, int py)
 	return(ray);
 }
 
-mlx_image_t *render(t_camera *camera, t_world *world, mlx_image_t *image)
+mlx_image_t *render(t_camera *camera, t_world *world, mlx_image_t *image, mlx_t *mlx)
 {
 	t_ray ray;
 	t_color3 color;
@@ -90,8 +90,10 @@ mlx_image_t *render(t_camera *camera, t_world *world, mlx_image_t *image)
 			printf("Rendering %d/%d\n", y * camera->hsize + x, total);
 			ray = ray_for_pixel(camera, x, y);			
 			color = color_at(world, ray, RECURSIVE_DEPTH);
+			// printf("%f %f %f\n", color.r, color.g, color.b);
 			color_int = color_to_int(color);
 			mlx_put_pixel(image, x, y, color_int);
+			mlx_image_to_window(mlx, image, 0, 0);
 			x++;
 		}
 		y++;

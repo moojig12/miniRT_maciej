@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:11:21 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/29 08:59:28 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:48:13 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_color3 pattern_at(t_pattern pattern, t_point3 point)
 {
 	t_color3	null;
 
-	null = new_color3(0, 0, 0);
+	null = new_color3(10, 10, 10);
 	if (pattern.type == STRIPE)
 		return(stripe_at(pattern, point));
 	if (pattern.type == GRADIENT)

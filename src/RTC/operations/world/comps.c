@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:09:58 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/28 22:55:37 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:51:42 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,17 @@ t_color3 color_at(t_world *world, t_ray ray, int remaining)
 	t_color3 color;
 	
 	xs = intersect_world(world, ray);
-	if (xs.count == 0)
+	if (xs.count < 1)
+	{
+		printf("wtf1");
 		return (new_color3(0, 0, 0));
-
+	}
 	i = hit(xs);
 	if (i.shape == NULL)
+	{
+		printf("wtf2");
 		return (new_color3(0, 0, 0));
+	}
 
 	comps = prepare_computations(i, ray);
 	color = shade_hit(world, comps, remaining);

@@ -11,7 +11,7 @@
 CC				:= cc
 
 # Compiler flags
-CFLAGS			+= -Wall -Wextra -Werror -g
+CFLAGS			+= -Wall -Wextra -Werror -g -fsanitize=address
 CFLAGS			+= -pedantic -Wunreachable-code
 CFLAGS			+= -Wshadow
 

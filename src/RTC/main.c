@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:54:43 by mdomnik           #+#    #+#             */
-/*   Updated: 2024/11/29 09:08:11 by root             ###   ########.fr       */
+/*   Updated: 2024/11/29 09:44:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -571,9 +571,12 @@ mlx_image_t	*main_allocation(mlx_t *mlx, t_camera *camera)
 // // CAMERA TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 int main (void)
 {
-	mlx_t *mlx = mlx_init(800, 400, "test", 1);
+	mlx_t *mlx = mlx_init(800, 600, "test", 1);
 	if (!mlx)
+	{
 		printf("MLX initialization failed\n");
+		exit (1);
+	}
 	t_world	*world = test_world_plane();
 	t_camera *camera = camera_new(800, 400, M_PI / 3);
 	camera->transform = view_transformation(new_point3(0, 1.5, -5), new_point3(0, 1, 0), new_vec3(0, 1, 0));
@@ -582,7 +585,7 @@ int main (void)
 	
 	image = main_allocation(mlx, camera);
 
-	render(camera, world, image);
+	render(camera, world, image, mlx);
 	mlx_image_to_window(mlx, image, 0, 0);
 	printf("done\n");
 	mlx_loop(mlx);
